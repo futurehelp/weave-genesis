@@ -1,10 +1,12 @@
 // components/navigation/AnimatedTabBar.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MotiView } from 'moti';
 import { usePathname, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+
+const { width } = Dimensions.get('window');
 
 type TabIconName = 
   | 'home-outline' 
@@ -91,14 +93,7 @@ const AnimatedTabBar = () => {
                 color={isActive ? '#14F195' : '#AAAAAA'}
               />
               
-              {isActive && (
-                <MotiView
-                  from={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: 'timing', duration: 300 }}
-                  style={styles.activeIndicator}
-                />
-              )}
+              {/* Removed the dot indicator */}
             </MotiView>
             
             <MotiView
@@ -146,14 +141,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 4,
-  },
-  activeIndicator: {
-    position: 'absolute',
-    bottom: -8,
-    width: 4,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#14F195',
   },
   label: {
     fontSize: 10,

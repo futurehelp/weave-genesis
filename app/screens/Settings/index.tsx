@@ -1,10 +1,11 @@
 // app/screens/Settings/index.tsx
-import { Ionicons } from '@expo/vector-icons';
-import { MotiView } from 'moti';
 import React from 'react';
-import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MotiView } from 'moti';
+import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../../styles/ThemeProvider';
+import { useRouter } from 'expo-router';
 
 // Define proper types for the SettingItem props
 interface SettingItemProps {
@@ -19,6 +20,7 @@ interface SettingItemProps {
 export default function Settings() {
   const { theme, setTheme, themeMode } = useTheme();
   const { colors } = theme;
+  const router = useRouter();
   
   // Toggle for dark mode
   const isDarkMode = themeMode === 'dark';
@@ -66,6 +68,11 @@ export default function Settings() {
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <View style={[styles.header, { borderBottomColor: colors.border }]}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <Ionicons name="arrow-back" size={24} color={colors.text} />
+          <Text style={[styles.backText, { color: colors.text }]}>Back</Text>
+        </TouchableOpacity>
+        
         <MotiView
           from={{ opacity: 0, translateY: -10 }}
           animate={{ opacity: 1, translateY: 0 }}
@@ -73,6 +80,8 @@ export default function Settings() {
         >
           <Text style={[styles.headerTitle, { color: colors.text }]}>Settings</Text>
         </MotiView>
+        
+        <View style={styles.placeholderView} />
       </View>
       
       <ScrollView style={styles.scrollView}>
@@ -133,12 +142,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     borderBottomWidth: 1,
   },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  backText: {
+    marginLeft: 4,
+    fontSize: 16,
+  },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
+  },
+  placeholderView: {
+    width: 24,
   },
   scrollView: {
     flex: 1,
