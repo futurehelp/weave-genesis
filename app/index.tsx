@@ -1,9 +1,9 @@
 // app/index.tsx
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Redirect } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useTheme } from './styles/ThemeProvider';
+import React, { useCallback, useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { useTheme } from '../styles/ThemeProvider';
 
 // Keep the splash screen visible until we're ready
 SplashScreen.preventAutoHideAsync();

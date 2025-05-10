@@ -1,12 +1,12 @@
 // app/screens/Dashboard/index.tsx
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
-import { useTheme } from './../../styles/ThemeProvider';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView, useAnimationState } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
+import { MotiView, useAnimationState } from 'moti';
+import React, { useEffect } from 'react';
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../styles/ThemeProvider';
 
 const { width } = Dimensions.get('window');
 

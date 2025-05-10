@@ -1,11 +1,11 @@
 // app/screens/ThreadBuilder/index.tsx
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from './../../styles/ThemeProvider';
 import { useRouter } from 'expo-router';
+import { MotiView } from 'moti';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../styles/ThemeProvider';
 
 export default function ThreadBuilder() {
   const { theme } = useTheme();

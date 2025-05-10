@@ -1,10 +1,10 @@
 // app/screens/Settings/index.tsx
-import React from 'react';
-import { View, Text, StyleSheet, Switch, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from './../../styles/ThemeProvider';
+import { MotiView } from 'moti';
+import React from 'react';
+import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../styles/ThemeProvider';
 
 // Define proper types for the SettingItem props
 interface SettingItemProps {

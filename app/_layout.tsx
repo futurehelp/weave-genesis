@@ -1,12 +1,12 @@
 // app/_layout.tsx
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
-import { ThemeProvider } from './styles/ThemeProvider';
 import AnimatedTabBar from '../components/navigation/AnimatedTabBar';
+import { ThemeProvider } from './styles/ThemeProvider';
 
 // Import necessary for Moti animations
 import 'react-native-reanimated';

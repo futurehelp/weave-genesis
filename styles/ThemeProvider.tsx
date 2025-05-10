@@ -1,7 +1,7 @@
 // app/styles/ThemeProvider.tsx
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
-import { colors, ColorPalette } from '../../styles/colors';
+import { colors, ColorPalette } from './colors';
 
 // Define spacing type
 export interface Spacing {

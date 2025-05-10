@@ -1,9 +1,9 @@
 // app/screens/WeaveFeed/index.tsx
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
-import { useTheme } from './../../styles/ThemeProvider';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../styles/ThemeProvider';
 
 export default function WeaveFeed() {
   const { theme } = useTheme();
