@@ -49,7 +49,7 @@ const AnimatedLetter = ({ letter, index, total }: { letter: string; index: numbe
       clearTimeout(timer);
       clearInterval(interval);
     };
-  }, []);
+  }, [animationState, index]);
 
   // Calculate gradient color based on position
   const colorStart = '#14F195'; // Solana green
@@ -181,7 +181,7 @@ export default function Dashboard() {
           animate={{ opacity: 1, translateY: 0 }}
           transition={{ type: 'timing', duration: 500 }}
         >
-          <Text style={[styles.headerTitle, { color: colors.text }]}>Dashboard</Text>
+          {/* <Text style={[styles.headerTitle, { color: colors.text }]}>Dashboard</Text> */}
         </MotiView>
         
         <MotiView

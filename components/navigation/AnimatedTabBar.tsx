@@ -1,12 +1,12 @@
 // components/navigation/AnimatedTabBar.tsx
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MotiView } from 'moti';
 import { usePathname, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
 
-const { width } = Dimensions.get('window');
+// const { width } = Dimensions.get('window');
 
 type TabIconName = 
   | 'home-outline' 

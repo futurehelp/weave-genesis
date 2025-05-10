@@ -1,13 +1,13 @@
 // app/screens/WeaveFeed/index.tsx
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView, MotiText, AnimatePresence } from 'moti';
+import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../../../styles/ThemeProvider';
 import { useRouter } from 'expo-router';
 
-const { width } = Dimensions.get('window');
+// const { width } = Dimensions.get('window');
 
 // Mock data for feed
 const FEED_ITEMS = [
@@ -183,7 +183,6 @@ export default function WeaveFeed() {
       <View style={[styles.header, { borderBottomColor: colors.border }]}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text} />
-          <Text style={[styles.backText, { color: colors.text }]}>Back</Text>
         </TouchableOpacity>
         
         <MotiView
@@ -211,7 +210,7 @@ export default function WeaveFeed() {
           style={styles.endMessage}
         >
           <Text style={[styles.endMessageText, { color: colors.textSecondary }]}>
-            You're all caught up!
+            {"Don't forget to save"}
           </Text>
         </MotiView>
       </ScrollView>

@@ -1,11 +1,11 @@
 // app/screens/Settings/index.tsx
-import React from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../../styles/ThemeProvider';
 import { useRouter } from 'expo-router';
+import { MotiView } from 'moti';
+import React from 'react';
+import { ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTheme } from '../../../styles/ThemeProvider';
 
 // Define proper types for the SettingItem props
 interface SettingItemProps {
@@ -70,7 +70,6 @@ export default function Settings() {
       <View style={[styles.header, { borderBottomColor: colors.border }]}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text} />
-          <Text style={[styles.backText, { color: colors.text }]}>Back</Text>
         </TouchableOpacity>
         
         <MotiView
