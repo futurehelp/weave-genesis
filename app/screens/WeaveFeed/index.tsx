@@ -14,50 +14,50 @@ const FEED_ITEMS = [
   {
     id: '1',
     author: 'Alex Johnson',
-    avatar: 'https://via.placeholder.com/60',
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
     timestamp: '2 hours ago',
     content: 'Just launched my new project built with Weave! Check out this no-code blockchain app I made in just a few hours.',
     likes: 42,
     comments: 7,
     shares: 3,
     tags: ['NoCode', 'Blockchain', 'Launch'],
-    isLiked: false
+    isLiked: false,
   },
   {
     id: '2',
     author: 'Sarah Miller',
-    avatar: 'https://via.placeholder.com/60',
+    avatar: 'https://randomuser.me/api/portraits/women/65.jpg',
     timestamp: '5 hours ago',
     content: "Weave AI capabilities are mind-blowing. I asked it to generate a landing page and the results were incredible.",
     likes: 28,
     comments: 12,
     shares: 5,
     tags: ['AI', 'Design', 'Productivity'],
-    isLiked: true
+    isLiked: true,
   },
   {
     id: '3',
     author: 'David Chen',
-    avatar: 'https://via.placeholder.com/60',
+    avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
     timestamp: 'Yesterday',
     content: 'Anyone interested in collaborating on a DeFi project using Weave? Looking for designers and blockchain enthusiasts!',
     likes: 15,
     comments: 23,
     shares: 2,
     tags: ['DeFi', 'Collaboration', 'Design'],
-    isLiked: false
+    isLiked: false,
   },
   {
     id: '4',
     author: 'Maria Garcia',
-    avatar: 'https://via.placeholder.com/60',
+    avatar: 'https://randomuser.me/api/portraits/women/43.jpg',
     timestamp: '2 days ago',
     content: 'Just published my thread about "Getting Started with Blockchain Development" - all built and designed in Weave!',
     likes: 67,
     comments: 14,
     shares: 9,
     tags: ['Tutorial', 'Blockchain', 'ThreadBuilder'],
-    isLiked: false
+    isLiked: false,
   },
 ];
 
