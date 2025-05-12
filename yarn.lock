@@ -4997,6 +4997,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-location@npm:^18.1.5":
+  version: 18.1.5
+  resolution: "expo-location@npm:18.1.5"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/e054495dd7d30f1b75475dac151f0a7fda60fcd6d8068c41b0cacc0958a62c0270d1f671d6e62a268fc4c5196cbf9195913d9a5d55acb98812e444ca83a46adb
+  languageName: node
+  linkType: hard
+
 "expo-modules-autolinking@npm:2.1.10":
   version: 2.1.10
   resolution: "expo-modules-autolinking@npm:2.1.10"
@@ -5109,6 +5118,18 @@ __metadata:
     react-native-web:
       optional: true
   checksum: 10c0/5281f3237f0a509c0960a2991026ff36218309fa53ddebea0bba3a3b0ff81d1a8ca89ccc4f74b12a9929a770b937f682ed6d2141ad812ef942b4fa94b1ba9491
+  languageName: node
+  linkType: hard
+
+"expo-task-manager@npm:^13.1.5":
+  version: 13.1.5
+  resolution: "expo-task-manager@npm:13.1.5"
+  dependencies:
+    unimodules-app-loader: "npm:~5.1.3"
+  peerDependencies:
+    expo: "*"
+    react-native: "*"
+  checksum: 10c0/25ef85d4b5a8476f450f0f447466b4c72a51ee814d31b36c083ef132ecbc2f1266e751e956457e8b59df032d3d45eedfab938956b74ac160e2061decba46ab93
   languageName: node
   linkType: hard
 
@@ -10032,6 +10053,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unimodules-app-loader@npm:~5.1.3":
+  version: 5.1.3
+  resolution: "unimodules-app-loader@npm:5.1.3"
+  checksum: 10c0/c0756e69ed81514d70a66cb252c79c697d0698e14249a0bfaff0ee91a0499826bf61c20f57163918514f71a037c36204371f303753dd1efb11f3cd5217cfcaed
+  languageName: node
+  linkType: hard
+
 "unique-filename@npm:^4.0.0":
   version: 4.0.0
   resolution: "unique-filename@npm:4.0.0"
@@ -10261,11 +10289,13 @@ __metadata:
     expo-haptics: "npm:~14.1.4"
     expo-image: "npm:~2.1.7"
     expo-linking: "npm:^7.1.5"
+    expo-location: "npm:^18.1.5"
     expo-router: "npm:^5.0.6"
     expo-splash-screen: "npm:^0.30.8"
     expo-status-bar: "npm:^2.2.3"
     expo-symbols: "npm:~0.4.4"
     expo-system-ui: "npm:~5.0.7"
+    expo-task-manager: "npm:^13.1.5"
     expo-web-browser: "npm:~14.1.6"
     moti: "npm:^0.30.0"
     react: "npm:19.0.0"
