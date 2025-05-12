@@ -43,9 +43,24 @@
             "scheme": "weavegenesis",
             "host": "*"
           },
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "weavegenesis",
+            "host": "*"
+          },
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
-      ]
+      ],
+      "package": "com.yada.weavegenesis"
     },
     "web": {
       "bundler": "metro",
