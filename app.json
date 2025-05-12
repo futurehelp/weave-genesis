@@ -9,14 +9,43 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yada.weavegenesis",
+      "infoPlist": {
+        "UIApplicationSupportsIndirectInputEvents": true,
+        "UIApplicationShortcutItems": [
+          {
+            "UIApplicationShortcutItemType": "com.yada.weavegenesis.open-profile",
+            "UIApplicationShortcutItemTitle": "Open Profile",
+            "UIApplicationShortcutItemIconType": "Contact"
+          },
+          {
+            "UIApplicationShortcutItemType": "com.yada.weavegenesis.new-post",
+            "UIApplicationShortcutItemTitle": "New Post",
+            "UIApplicationShortcutItemIconType": "Compose"
+          }
+        ]
+      },
+      "associatedDomains": [
+        "applinks:weavegenesis.app"
+      ]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "weavegenesis",
+            "host": "*"
+          },
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "bundler": "metro",
