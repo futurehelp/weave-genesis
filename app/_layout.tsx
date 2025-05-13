@@ -1,25 +1,23 @@
 // app/_layout.tsx
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AnimatedTabBar from '../components/navigation/AnimatedTabBar';
 import { ThemeProvider } from '../styles/ThemeProvider';
-
-// Import necessary for Moti animations
-import 'react-native-reanimated';
-
-// ✅ Import GPS geofencing hook
 import useApartmentGeofence from '../hooks/useApartmentGeofence';
+
+// Import Moti’s animation dependency
+import 'react-native-reanimated';
 
 export default function RootLayout() {
   // ✅ Enable GPS alert logic when app mounts
   useApartmentGeofence();
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.flex}>
       <SafeAreaProvider>
         <ThemeProvider initialTheme="dark">
           <StatusBar style="light" />
@@ -42,6 +40,9 @@ export default function RootLayout() {
 }
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: '#121212',

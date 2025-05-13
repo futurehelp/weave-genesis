@@ -1,34 +1,31 @@
+import { useEffect } from "react";
 import * as Location from "expo-location";
 import * as TaskManager from "expo-task-manager";
-import { useEffect } from "react";
 import { Alert } from "react-native";
 
 const GEOFENCE_TASK = "leave-home-task";
 
-// 1. Register background geofencing task
+// 1. Define the geofence task (now async + typed)
 TaskManager.defineTask(GEOFENCE_TASK, async ({ data, error }) => {
   if (error) {
     console.error("Geofence task error:", error);
     return;
   }
 
-  const { eventType } = data as {
+  if (!data) return;
+
+  const {
+    eventType,
+    region,
+  } = data as {
     eventType: Location.GeofencingEventType;
-    region?: {
-      identifier: string;
-      latitude: number;
-      longitude: number;
-      radius: number;
-    };
+    region: Location.LocationRegion;
   };
 
+  console.log("📍 Geofence event:", eventType, region);
+
   if (eventType === Location.GeofencingEventType.Exit) {
-    Alert.alert(
-      "🏠 Leaving Home",
-      "You've exited your apartment zone.",
-      [{ text: "OK", style: "default" }],
-      { cancelable: true }
-    );
+    Alert.alert("🏠 Leaving Home", "You've exited your apartment zone.");
   }
 });
 
@@ -38,23 +35,32 @@ export default function useApartmentGeofence() {
     (async () => {
       const { status } = await Location.requestBackgroundPermissionsAsync();
       if (status !== "granted") {
-        Alert.alert("Location Denied", "Cannot monitor location in background.");
+        Alert.alert(
+          "Permission Denied",
+          "Location permission is required to detect when you leave your apartment."
+        );
         return;
       }
 
-      const homeRegion = {
+      const homeRegion: Location.LocationRegion = {
         identifier: "apartment",
-        latitude: 13.7228,     // Replace with your actual apartment location
-        longitude: 100.5898,
-        radius: 50
+        latitude: 13.73195,
+        longitude: 100.57138,
+        radius: 75,
+        notifyOnEnter: true,
+        notifyOnExit: true,
       };
 
       const tasks = await TaskManager.getRegisteredTasksAsync();
-      const alreadyRunning = tasks.some(t => t.taskName === GEOFENCE_TASK);
+      const alreadyRunning = tasks.some(task => task.taskName === GEOFENCE_TASK);
 
-      if (!alreadyRunning) {
-        await Location.startGeofencingAsync(GEOFENCE_TASK, [homeRegion]);
+      if (alreadyRunning) {
+        console.log("🟡 Stopping existing geofence task...");
+        await Location.stopGeofencingAsync(GEOFENCE_TASK);
       }
+
+      console.log("🟢 Starting geofence task...");
+      await Location.startGeofencingAsync(GEOFENCE_TASK, [homeRegion]);
     })();
   }, []);
 }
