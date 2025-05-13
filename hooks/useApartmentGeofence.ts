@@ -5,7 +5,7 @@ import { Alert } from "react-native";
 
 const GEOFENCE_TASK = "leave-home-task";
 
-// 1. Define the geofence task (now async + typed)
+// 1. Define geofence task
 TaskManager.defineTask(GEOFENCE_TASK, async ({ data, error }) => {
   if (error) {
     console.error("Geofence task error:", error);
@@ -51,15 +51,18 @@ export default function useApartmentGeofence() {
         notifyOnExit: true,
       };
 
+      // 🚨 Remove *all* stale geofence tasks before restarting
       const tasks = await TaskManager.getRegisteredTasksAsync();
-      const alreadyRunning = tasks.some(task => task.taskName === GEOFENCE_TASK);
-
-      if (alreadyRunning) {
-        console.log("🟡 Stopping existing geofence task...");
-        await Location.stopGeofencingAsync(GEOFENCE_TASK);
+      if (tasks.some(t => t.taskName === GEOFENCE_TASK)) {
+        console.log("🧹 Stopping and unregistering old geofence task...");
+        try {
+          await Location.stopGeofencingAsync(GEOFENCE_TASK);
+        } catch (err) {
+          console.warn("Could not stop old task:", err);
+        }
       }
 
-      console.log("🟢 Starting geofence task...");
+      console.log("🟢 Starting new geofence task...");
       await Location.startGeofencingAsync(GEOFENCE_TASK, [homeRegion]);
     })();
   }, []);
