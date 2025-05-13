@@ -11,7 +11,13 @@ import { ThemeProvider } from '../styles/ThemeProvider';
 // Import necessary for Moti animations
 import 'react-native-reanimated';
 
+// ✅ Import GPS geofencing hook
+import useApartmentGeofence from '../hooks/useApartmentGeofence';
+
 export default function RootLayout() {
+  // ✅ Enable GPS alert logic when app mounts
+  useApartmentGeofence();
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>

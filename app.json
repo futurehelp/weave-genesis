@@ -9,9 +9,13 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
       "bundleIdentifier": "com.yada.weavegenesis",
+      "supportsTablet": true,
+      "associatedDomains": ["applinks:weavegenesis.app"],
       "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "We use your location to alert you when you leave your apartment.",
+        "NSLocationAlwaysUsageDescription": "We need background location to detect when you've exited your apartment region.",
+        "UIBackgroundModes": ["location"],
         "UIApplicationSupportsIndirectInputEvents": true,
         "UIApplicationShortcutItems": [
           {
@@ -25,10 +29,7 @@
             "UIApplicationShortcutItemIconType": "Compose"
           }
         ]
-      },
-      "associatedDomains": [
-        "applinks:weavegenesis.app"
-      ]
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -36,6 +37,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION"],
       "intentFilters": [
         {
           "action": "VIEW",
@@ -43,24 +45,9 @@
             "scheme": "weavegenesis",
             "host": "*"
           },
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "data": {
-            "scheme": "weavegenesis",
-            "host": "*"
-          },
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
-      ],
-      "package": "com.yada.weavegenesis"
+      ]
     },
     "web": {
       "bundler": "metro",
