@@ -1,5 +1,5 @@
 // app/_layout.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -8,13 +8,19 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import AnimatedTabBar from '../components/navigation/AnimatedTabBar';
 import { ThemeProvider } from '../styles/ThemeProvider';
 import useApartmentGeofence from '../hooks/useApartmentGeofence';
+import * as SplashScreen from 'expo-splash-screen';
 
-// Import Moti’s animation dependency
-import 'react-native-reanimated';
+// ✅ Prevent auto-hide before your app is ready
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
-  // ✅ Enable GPS alert logic when app mounts
+  // Enable GPS/geofence logic
   useApartmentGeofence();
+
+  // ✅ Hide splash as soon as app mounts
+  useEffect(() => {
+    SplashScreen.hideAsync().catch(() => {});
+  }, []);
 
   return (
     <GestureHandlerRootView style={styles.flex}>
