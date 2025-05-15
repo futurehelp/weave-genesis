@@ -33,17 +33,17 @@ const tabs: TabItem[] = [
   {
     name: 'Thread Builder',
     icon: 'git-branch-outline',
-    path: '/screens/ThreadBuilder',
+    path: '/ThreadBuilder',
   },
   {
     name: 'Feed',
     icon: 'layers-outline',
-    path: '/screens/WeaveFeed',
+    path: '/WeaveFeed',
   },
   {
     name: 'Settings',
     icon: 'settings-outline',
-    path: '/screens/Settings',
+    path: '/Settings',
   },
 ];
 

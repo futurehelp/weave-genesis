@@ -4,20 +4,30 @@
     "slug": "weave-genesis",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "weavegenesis",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-
+    "icon": "./assets/images/icon.png",                // Default app icon for Android & iOS if no override
+    "splash": {
+      "image": "./assets/images/ios-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "newArchEnabled": false,
+    "jsEngine": "jsc",
     "ios": {
-      "bundleIdentifier": "com.yada.weavegenesis.dev",
+      "icon": "./assets/images/ios-icon.png",          // iOS-specific app icon
+      "bundleIdentifier": "com.yada.weavegenesis",
       "supportsTablet": true,
+      "config": {
+        "usesNonExemptEncryption": false,
+        "usesHermes": false
+      },
       "associatedDomains": [
         "applinks:weavegenesis.app"
       ],
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to alert you when you leave your apartment.",
-        "NSLocationAlwaysUsageDescription": "We need background location to detect when you've exited your apartment region.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "We need background location to detect when you've exited your apartment region.",
         "UIBackgroundModes": [
           "location"
         ],
@@ -36,9 +46,8 @@
         ]
       }
     },
-
     "android": {
-      "package": "com.yada.weavegenesis.dev",
+      "package": "com.yada.weavegenesis",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -62,13 +71,11 @@
         }
       ]
     },
-
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-
     "plugins": [
       "expo-router",
       [
@@ -79,11 +86,25 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "We need background location to detect when you've exited your apartment region."
+        }
       ]
     ],
-
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "expo-router": {
+        "origin": "static"
+      },
+      "router": {},
+      "eas": {
+        "projectId": "d2434798-c764-4755-b74e-c3e8e6a7c502"
+      }
     }
   }
 }
