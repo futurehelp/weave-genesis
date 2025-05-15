@@ -6,7 +6,7 @@ import { MotiView, useAnimationState } from 'moti';
 import React, { useEffect } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '../../../styles/ThemeProvider';
+import { useTheme } from '../../styles/ThemeProvider';
 
 const { width } = Dimensions.get('window');
 
@@ -166,7 +166,7 @@ export default function Dashboard() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     
     // Navigate to Thread Builder
-    router.push('/screens/ThreadBuilder' as any);
+    router.push('/ThreadBuilder' as any);
   };
 
   // Title text with letters for animation

@@ -5,7 +5,7 @@ import { MotiView } from 'moti';
 import React from 'react';
 import { ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '../../../styles/ThemeProvider';
+import { useTheme } from '../../styles/ThemeProvider';
 
 // Define proper types for the SettingItem props
 interface SettingItemProps {
