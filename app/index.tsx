@@ -2,10 +2,13 @@
 import { Redirect } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useCallback, useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { LogBox, StyleSheet, View } from 'react-native';
 import { useTheme } from '../styles/ThemeProvider';
 
-// Keep the splash screen visible until we're ready
+// ✅ Show all logs
+LogBox.ignoreAllLogs(false);
+
+// ✅ Prevent native splash from hiding automatically
 SplashScreen.preventAutoHideAsync();
 
 export default function Index() {
@@ -14,15 +17,16 @@ export default function Index() {
 
   useEffect(() => {
     async function prepare() {
+      console.log('✅ JS is running: app/index.tsx');
+
       try {
-        // Pre-load fonts, data, etc.
-        // Artificially delay for demonstration
+        // ✅ Simulate load
         await new Promise(resolve => setTimeout(resolve, 1000));
       } catch (e) {
-        console.warn(e);
+        console.warn('❌ Error in prepare():', e);
       } finally {
-        // Tell the application to render
         setAppIsReady(true);
+        console.log('✅ App is ready');
       }
     }
 
@@ -31,22 +35,19 @@ export default function Index() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      // This tells the splash screen to hide immediately
+      console.log('✅ Hiding splash screen');
       await SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null;
-  }
+  if (!appIsReady) return null;
 
   return (
-    <View 
+    <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       onLayout={onLayoutRootView}
     >
-      {/* Redirect to the Dashboard */}
-      <Redirect href="/screens/Dashboard" />
+      <Redirect href="/Dashboard" />
     </View>
   );
 }

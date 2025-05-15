@@ -7,20 +7,23 @@
     "icon": "./assets/images/icon.png",
     "scheme": "weavegenesis",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
+    "jsEngine": "jsc",
 
     "ios": {
       "bundleIdentifier": "com.yada.weavegenesis.dev",
       "supportsTablet": true,
+      "config": {
+        "usesNonExemptEncryption": false,
+        "usesHermes": false
+      },
       "associatedDomains": [
         "applinks:weavegenesis.app"
       ],
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "We use your location to alert you when you leave your apartment.",
         "NSLocationAlwaysUsageDescription": "We need background location to detect when you've exited your apartment region.",
-        "UIBackgroundModes": [
-          "location"
-        ],
+        "UIBackgroundModes": ["location"],
         "UIApplicationSupportsIndirectInputEvents": true,
         "UIApplicationShortcutItems": [
           {
@@ -55,10 +58,7 @@
             "scheme": "weavegenesis",
             "host": "*"
           },
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     },
@@ -84,6 +84,12 @@
 
     "experiments": {
       "typedRoutes": true
+    },
+
+    "extra": {
+      "expo-router": {
+        "origin": "static"
+      }
     }
   }
 }

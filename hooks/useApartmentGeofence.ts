@@ -46,7 +46,7 @@ export default function useApartmentGeofence() {
         identifier: "apartment",
         latitude: 13.73195,
         longitude: 100.57138,
-        radius: 75,
+        radius: 175,
         notifyOnEnter: true,
         notifyOnExit: true,
       };

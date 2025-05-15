@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../../../styles/ThemeProvider';
+import { useTheme } from '../../styles/ThemeProvider';
 import { useRouter } from 'expo-router';
 
 // const { width } = Dimensions.get('window');
