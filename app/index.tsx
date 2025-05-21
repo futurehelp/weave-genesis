@@ -47,7 +47,7 @@ export default function Index() {
       style={[styles.container, { backgroundColor: theme.colors.background }]}
       onLayout={onLayoutRootView}
     >
-      <Redirect href="/Dashboard" />
+      <Redirect href="/Splash" />
     </View>
   );
 }

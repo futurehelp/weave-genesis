@@ -1,24 +1,17 @@
 // components/navigation/AnimatedTabBar.tsx
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { MotiView } from 'moti';
-import { usePathname, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+import { usePathname, useRouter } from 'expo-router';
+import { MotiView } from 'moti';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-// const { width } = Dimensions.get('window');
-
-type TabIconName = 
-  | 'home-outline' 
-  | 'home' 
-  | 'git-branch-outline' 
-  | 'git-branch' 
-  | 'layers-outline' 
-  | 'layers' 
-  | 'flash-outline'    // for Shortcuts
-  | 'flash'            // filled state
-  | 'settings-outline' 
-  | 'settings';
+type TabIconName =
+  | 'home-outline'  | 'home'
+  | 'git-branch-outline' | 'git-branch'
+  | 'layers-outline' | 'layers'
+  | 'flash-outline'  | 'flash'
+  | 'settings-outline' | 'settings';
 
 interface TabItem {
   name: string;
@@ -27,56 +20,32 @@ interface TabItem {
 }
 
 const tabs: TabItem[] = [
-  {
-    name: 'Home',
-    icon: 'home-outline',
-    path: '/',
-  },
-  {
-    name: 'Thread Builder',
-    icon: 'git-branch-outline',
-    path: '/ThreadBuilder',
-  },
-  {
-    name: 'Feed',
-    icon: 'layers-outline',
-    path: '/WeaveFeed',
-  },
-  {
-    name: 'Shortcuts',
-    icon: 'flash-outline',
-    path: '/ShortcutTemplates',
-  },
-  {
-    name: 'Settings',
-    icon: 'settings-outline',
-    path: '/Settings',
-  },
+  { name: 'Home',           icon: 'home-outline',         path: '/Dashboard'                },
+  { name: 'Thread Builder', icon: 'git-branch-outline',  path: '/ThreadBuilder'   },
+  { name: 'Feed',           icon: 'layers-outline',       path: '/WeaveFeed'       },
+  { name: 'Shortcuts',      icon: 'flash-outline',        path: '/ShortcutTemplates' },
+  { name: 'Settings',       icon: 'settings-outline',     path: '/Settings'        },
 ];
 
-const AnimatedTabBar = () => {
+export default function AnimatedTabBar() {
   const router = useRouter();
   const currentPath = usePathname();
 
   const handlePress = (path: string) => {
-    // Play haptic feedback
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    
-    // Navigate to the route - use the type assertion to fix the error
     router.push(path as any);
   };
 
   return (
     <View style={styles.container}>
-      {tabs.map((tab, index) => {
-        const isActive = currentPath === tab.path || 
-                        (currentPath === '/screens/Dashboard' && tab.path === '/');
-        
-        // Convert outline icon to filled icon when active
-        const iconName = isActive 
-          ? (tab.icon.replace('-outline', '') as TabIconName) 
+      {tabs.map((tab) => {
+        const isActive =
+          currentPath === tab.path ||
+          (tab.path === '/' && ['/','/index'].includes(currentPath));
+        const iconName = isActive
+          ? (tab.icon.replace('-outline', '') as TabIconName)
           : tab.icon;
-        
+
         return (
           <TouchableOpacity
             key={tab.name}
@@ -86,38 +55,16 @@ const AnimatedTabBar = () => {
           >
             <MotiView
               style={styles.iconContainer}
-              animate={{
-                scale: isActive ? 1.1 : 1,
-              }}
-              transition={{
-                type: 'timing',
-                duration: 300,
-              }}
+              animate={{ scale: isActive ? 1.1 : 1 }}
+              transition={{ type: 'timing', duration: 300 }}
             >
-              <Ionicons
-                name={iconName as any}
-                size={24}
-                color={isActive ? '#14F195' : '#AAAAAA'}
-              />
-              
-              {/* Removed the dot indicator */}
+              <Ionicons name={iconName as any} size={24} color={isActive ? '#14F195' : '#AAAAAA'} />
             </MotiView>
-            
             <MotiView
-              animate={{
-                translateY: isActive ? -4 : 0,
-              }}
-              transition={{
-                type: 'timing',
-                duration: 300,
-              }}
+              animate={{ translateY: isActive ? -4 : 0 }}
+              transition={{ type: 'timing', duration: 300 }}
             >
-              <Text 
-                style={[
-                  styles.label, 
-                  { color: isActive ? '#14F195' : '#AAAAAA' }
-                ]}
-              >
+              <Text style={[styles.label, { color: isActive ? '#14F195' : '#AAAAAA' }]}>
                 {tab.name}
               </Text>
             </MotiView>
@@ -126,7 +73,7 @@ const AnimatedTabBar = () => {
       })}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -144,7 +91,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   iconContainer: {
-    position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 4,
@@ -154,5 +100,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-
-export default AnimatedTabBar;
