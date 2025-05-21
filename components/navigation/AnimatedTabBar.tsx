@@ -15,6 +15,8 @@ type TabIconName =
   | 'git-branch' 
   | 'layers-outline' 
   | 'layers' 
+  | 'flash-outline'    // for Shortcuts
+  | 'flash'            // filled state
   | 'settings-outline' 
   | 'settings';
 
@@ -39,6 +41,11 @@ const tabs: TabItem[] = [
     name: 'Feed',
     icon: 'layers-outline',
     path: '/WeaveFeed',
+  },
+  {
+    name: 'Shortcuts',
+    icon: 'flash-outline',
+    path: '/ShortcutTemplates',
   },
   {
     name: 'Settings',
