@@ -1,190 +1,125 @@
-// app/ShortcutTemplates/index.tsx
+// app/screens/ShortcutTemplates/index.tsx
 import React, { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  ScrollView, 
-  TouchableOpacity, 
-  Dimensions 
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Modal, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MotiView } from 'moti';
 import { Ionicons } from '@expo/vector-icons';
+import { MotiView } from 'moti';
 import { useTheme } from '../../styles/ThemeProvider';
 import { useRouter } from 'expo-router';
 
-// Example template data
-const templateData = [
-  { id: '1', name: 'Basic Web Server', description: 'Simple web server with nginx', icon: 'globe-outline' as const },
-  { id: '2', name: 'Database Cluster', description: 'MySQL database with replicas', icon: 'server-outline' as const },
-  { id: '3', name: 'Static Website', description: 'S3 hosted static site with CDN', icon: 'document-outline' as const },
-  { id: '4', name: 'Serverless API', description: 'API Gateway with Lambda functions', icon: 'code-slash-outline' as const },
-  { id: '5', name: 'Kubernetes Cluster', description: 'Managed K8s with autoscaling', icon: 'apps-outline' as const },
+const { width } = Dimensions.get('window');
+
+const MOCK_THREADS = [
+  { id: '1', title: 'SOS Thread', description: 'Turn lights red, alert Dylan, message on Gmail & Discord.', color: '#DC1FFF' },
+  { id: '2', title: 'All Hands on Meeting', description: 'Notifies everyone on Discord for urgent meeting.', color: '#14F195' },
 ];
 
 export default function ShortcutTemplates() {
   const { theme } = useTheme();
   const { colors } = theme;
   const router = useRouter();
-  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
-
-  const handleSelectTemplate = (id: string) => {
-    setSelectedTemplate(id);
-    // Navigate or perform action with selected template
-    setTimeout(() => {
-      router.push('/TemplateConfig');
-    }, 300);
-  };
+  const [showHelp, setShowHelp] = useState(false);
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <View style={[styles.header, { borderBottomColor: colors.border }]}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text} />
         </TouchableOpacity>
-        <Text style={[styles.title, { color: colors.text }]}>Shortcut Templates</Text>
-        <View style={{ width: 24 }} />
+        <Text style={[styles.headerTitle, { color: colors.text }]}>Shortcuts</Text>
+        <TouchableOpacity onPress={() => setShowHelp(true)}>
+          <Ionicons name="help-circle-outline" size={22} color={colors.primary} />
+        </TouchableOpacity>
       </View>
 
-      <Text style={[styles.subtitle, { color: colors.textSecondary }]}>
-        Select a template to quickly create your infrastructure
-      </Text>
-
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {templateData.map((template, index) => (
-          <MotiView
-            key={template.id}
-            from={{ opacity: 0, translateY: 20 }}
-            animate={{ opacity: 1, translateY: 0 }}
-            transition={{ 
-              type: 'timing', 
-              delay: 300 + index * 100, 
-              duration: 500 
-            }}
-          >
+      {/* Explainer Modal */}
+      <Modal visible={showHelp} transparent animationType="fade">
+        <View style={styles.modalOverlay}>
+          <View style={[styles.modalContent, { backgroundColor: colors.card }]}>
+            <Text style={[styles.modalTitle, { color: colors.primary }]}>How to use Shortcuts</Text>
+            <Text style={[styles.modalText, { color: colors.text }]}>
+              1. Go to the iOS Shortcuts app and create a new automation.
+              {"\n\n"}2. Add a trigger (like “Message contains SOS”).
+              {"\n\n"}3. Search for Weave and select “Trigger Thread”.
+              {"\n\n"}4. Pick the workflow you want to trigger!
+            </Text>
             <TouchableOpacity
-              style={[
-                styles.templateItem,
-                { 
-                  backgroundColor: colors.card,
-                  borderColor: selectedTemplate === template.id ? colors.primary : colors.border
-                }
-              ]}
-              onPress={() => handleSelectTemplate(template.id)}
-              activeOpacity={0.7}
+              style={[styles.modalButton, { backgroundColor: colors.primary }]}
+              onPress={() => setShowHelp(false)}
             >
-              <View style={[styles.iconContainer, { backgroundColor: colors.primary + '20' }]}>
-                <Ionicons name={template.icon} size={28} color={colors.primary} />
-              </View>
-              <View style={styles.templateContent}>
-                <Text style={[styles.templateName, { color: colors.text }]}>
-                  {template.name}
-                </Text>
-                <Text style={[styles.templateDescription, { color: colors.textSecondary }]}>
-                  {template.description}
-                </Text>
-              </View>
-              <Ionicons 
-                name="chevron-forward" 
-                size={20} 
-                color={colors.textSecondary} 
-              />
+              <Text style={{ color: '#121212', fontWeight: 'bold' }}>Got it!</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <FlatList
+        data={MOCK_THREADS}
+        keyExtractor={item => item.id}
+        contentContainerStyle={styles.listContent}
+        ListEmptyComponent={() => (
+          <MotiView
+            from={{ opacity: 0, translateY: 20 }}
+            animate={{ opacity: 0.7, translateY: 0 }}
+            transition={{ type: 'timing', duration: 800 }}
+            style={styles.emptyState}
+          >
+            <Ionicons name="git-branch-outline" size={60} color={colors.secondary} />
+            <Text style={[styles.emptyText, { color: colors.text }]}>
+              No threads found! Create one in Weave to get started.
+            </Text>
+          </MotiView>
+        )}
+        renderItem={({ item, index }) => (
+          <MotiView
+            from={{ opacity: 0, scale: 0.95, translateY: 18 }}
+            animate={{ opacity: 1, scale: 1, translateY: 0 }}
+            transition={{ type: 'timing', delay: 120 * index }}
+            style={[styles.threadCard, { borderLeftColor: item.color, backgroundColor: colors.card }]}
+          >
+            <Text style={[styles.threadTitle, { color: colors.text }]}>{item.title}</Text>
+            <Text style={[styles.threadDesc, { color: colors.textSecondary }]}>{item.description}</Text>
+            <TouchableOpacity
+              style={[styles.shortcutButton, { backgroundColor: item.color }]}
+              onPress={() => {/* Show dialog: "Setup this in iOS Shortcuts app by searching Weave > Trigger Thread" */}}
+            >
+              <Ionicons name="flash-outline" size={18} color="#fff" />
+              <Text style={styles.shortcutButtonText}>Setup in Shortcuts</Text>
             </TouchableOpacity>
           </MotiView>
-        ))}
-      </ScrollView>
-
-      <MotiView
-        from={{ opacity: 0, translateY: 20 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: 'timing', delay: 800 }}
-        style={styles.footerContainer}
-      >
-        <TouchableOpacity 
-          style={[styles.createButton, { backgroundColor: colors.primary }]}
-          onPress={() => router.push('/CustomTemplate')}
-        >
-          <Ionicons name="add" size={22} color="#121212" />
-          <Text style={styles.createButtonText}>Create Custom Template</Text>
-        </TouchableOpacity>
-      </MotiView>
+        )}
+      />
     </SafeAreaView>
   );
 }
 
-const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-  },
+  container: { flex: 1 },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 8,
-    marginBottom: 16,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    padding: 16, borderBottomWidth: 1,
   },
-  backButton: {
-    padding: 8,
+  backButton: { padding: 4 },
+  headerTitle: { fontSize: 20, fontWeight: 'bold' },
+  listContent: { padding: 16 },
+  threadCard: {
+    borderRadius: 12, padding: 18, marginBottom: 18, borderLeftWidth: 5,
+    shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.07, shadowRadius: 10, elevation: 3,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  threadTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
+  threadDesc: { fontSize: 14, marginBottom: 18, opacity: 0.7 },
+  shortcutButton: {
+    flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-start',
+    paddingVertical: 8, paddingHorizontal: 18, borderRadius: 9, marginTop: 6,
   },
-  subtitle: {
-    fontSize: 14,
-    marginBottom: 24,
-  },
-  scrollView: {
-    flex: 1,
-  },
-  templateItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 12,
-    borderWidth: 1,
-    padding: 16,
-    marginBottom: 12,
-  },
-  iconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  templateContent: {
-    flex: 1,
-  },
-  templateName: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  templateDescription: {
-    fontSize: 13,
-  },
-  footerContainer: {
-    marginTop: 16,
-    marginBottom: 16,
-  },
-  createButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-    borderRadius: 12,
-  },
-  createButtonText: {
-    color: '#121212',
-    fontSize: 16,
-    fontWeight: '600',
-    marginLeft: 8,
-  },
+  shortcutButtonText: { color: '#fff', marginLeft: 7, fontWeight: '600' },
+  emptyState: { alignItems: 'center', marginTop: 48 },
+  emptyText: { fontSize: 17, opacity: 0.8, marginTop: 16, textAlign: 'center' },
+
+  // Modal
+  modalOverlay: { flex: 1, backgroundColor: '#0008', justifyContent: 'center', alignItems: 'center' },
+  modalContent: { borderRadius: 18, padding: 26, width: width * 0.8, alignItems: 'center' },
+  modalTitle: { fontSize: 20, fontWeight: 'bold', marginBottom: 14 },
+  modalText: { fontSize: 15, marginBottom: 22, textAlign: 'center' },
+  modalButton: { paddingVertical: 10, paddingHorizontal: 32, borderRadius: 12 },
 });

@@ -11,7 +11,8 @@
     "jsEngine": "jsc",
 
     "ios": {
-      "bundleIdentifier": "com.yada.weavegenesis.dev",
+      "bundleIdentifier": "com.yada.weavegenesis",
+      "icon": "./assets/images/icon.png",
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false,
@@ -41,7 +42,7 @@
     },
 
     "android": {
-      "package": "com.yada.weavegenesis.dev",
+      "package": "com.yada.weavegenesis",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
